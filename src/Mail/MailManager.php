@@ -17,7 +17,7 @@ class MailManager extends IlluminateMailManager
      */
     protected function resolve($name)
     {
-        $config = $this->getConfig($name);
+        $config = $this->getConfig($name ?? '');
 
         if (is_null($config)) {
             throw new InvalidArgumentException("Mailer [{$name}] is not defined.");
