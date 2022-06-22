@@ -4,6 +4,9 @@ namespace Igniter\Admin\Database\Factories;
 
 use Igniter\Flame\Database\Factories\Factory;
 
+/**
+ * @property $categories
+ */
 class LocationFactory extends Factory
 {
     protected $model = \Igniter\Admin\Models\Location::class;

@@ -2,25 +2,22 @@
 
 namespace Tests\Admin\Models;
 
+
 use Igniter\Admin\Models\Category;
+use Illuminate\Database\QueryException;
 
-it('can create a category and assign it to a location', function () {
-//    $location = Location::factory()->create();
-//    $category = Category::factory()->make();
-//    $category->locations = [$location->getKey()];
-//    $categoryModel = $category->create();
-
-    $this->assertTrue(true);
+it('can create a category', function () {
+    $this->assertNotNull(Category::factory()->create());
 });
 
 it('should fail to create a category when no name is provided', function () {
-    try {
-        $category = Category::factory()->make();
-        $category->name = null;
-        $category->save();
-        $this->assertFalse(true);
-    }
-    catch (\Exception $e) {
-        $this->assertFalse(false);
-    }
+    $this->expectException(QueryException::class);
+    $this->expectExceptionCode(23000);
+    $column_name = 'name';
+    $this->expectExceptionMessageMatches("/'$column_name' cannot be null/i");
+    Category::factory()->create(
+        [
+            $column_name => null
+        ]
+    );
 });
